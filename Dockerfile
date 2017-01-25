@@ -19,3 +19,5 @@ RUN echo "grep zkSer /opt/zkui/config.cfg" >> /root/.bash_history
 ENV ZKUI_ADMIN_PW=admin \
     ZKUI_USER_PW=user \
     ZKUI_PORT=9090
+COPY opt/qnib/zkui/bin/start.sh /opt/qnib/zkui/bin/
+CMD ["/opt/qnib/zkui/bin/start.sh"]
