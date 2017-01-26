@@ -17,7 +17,7 @@ RUN apk --no-cache add wget \
  && mv /opt/zkui-master /opt/zkui \
  && apk --no-cache del wget \
  && cd /opt/zkui && mvn clean install \
- && rm -rf /tmp/* /var/cache/apk/* /usr/lib/mvn
+ && rm -rf /tmp/* /var/cache/apk/* /usr/lib/mvn /opt/zkui/config.cfg
 RUN echo "grep zkSer /opt/zkui/config.cfg" >> /root/.bash_history
 ENV ZKUI_ADMIN_PW=admin \
     ZKUI_USER_PW=user \
