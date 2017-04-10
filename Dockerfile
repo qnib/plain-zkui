@@ -7,7 +7,7 @@ ENV M2_HOME=/usr/lib/mvn \
     ZK_SERVER=zk_backend:2181 \
     ZKUI_ADMIN_PW=manager
 
-RUN apk --no-cache add wget \
+RUN apk --no-cache add wget curl \
  && wget -qO - "http://ftp.unicamp.br/pub/apache/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" | tar xfz - -C /opt/ \
  && mv "/opt/apache-maven-$MAVEN_VERSION" "$M2_HOME" \
  && ln -s "$M2_HOME/bin/mvn" /usr/bin/mvn \
@@ -25,4 +25,6 @@ ENV ZKUI_ADMIN_PW=admin \
 COPY opt/qnib/zkui/bin/start.sh /opt/qnib/zkui/bin/
 COPY opt/qnib/entry/* /opt/qnib/entry/
 COPY opt/qnib/zkui/conf/zkui.conf.orig /opt/qnib/zkui/conf/
+HEALTHCHECK --interval=2s --retries=300 --timeout=1s \
+  CMD curl sI http://localhost:${ZKUI_PORT}
 CMD ["/opt/qnib/zkui/bin/start.sh"]

@@ -1,7 +1,7 @@
 #Server Port
 serverPort=ZKUI_PORT
 #Comma seperated list of all the zookeeper servers
-zkServer=ZKUI_SERVER
+zkServer=ZK_SERVER
 #Http path of the repository. Ignore if you dont intent to upload files from repository.
 scmRepo=http://myserver.com/@rev1=
 #Path appended to the repo url. Ignore if you dont intent to upload files from repository.

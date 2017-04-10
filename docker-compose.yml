@@ -17,9 +17,11 @@ services:
       restart_policy:
         condition: on-failure
   frontend:
-    image: qnib/plain-zkui:localv
+    image: qnib/plain-zkui
     ports:
       - "9090:9090"
+    environment:
+      ZK_SERVER: "zk_backend"
     deploy:
       resources:
         # Only one master for now
