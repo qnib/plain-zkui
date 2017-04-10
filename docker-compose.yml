@@ -1,0 +1,34 @@
+version: '3'
+services:
+  backend:
+    image: qnib/plain-zookeeper
+    ports:
+      - "2181:2181"
+    deploy:
+      resources:
+        # Only one master for now
+        replicas: 1
+        limits:
+          cpus: '1'
+          memory: 512M
+      update_config:
+        parallelism: 1
+        delay: 15s
+      restart_policy:
+        condition: on-failure
+  frontend:
+    image: qnib/plain-zkui:localv
+    ports:
+      - "9090:9090"
+    deploy:
+      resources:
+        # Only one master for now
+        replicas: 1
+        limits:
+          cpus: '1'
+          memory: 512M
+      update_config:
+        parallelism: 1
+        delay: 15s
+      restart_policy:
+        condition: on-failure

@@ -4,8 +4,8 @@ ARG MAVEN_VERSION="3.3.9"
 ENV M2_HOME=/usr/lib/mvn \
     JAVA_HOME=/usr/lib/jvm/java-8-oracle/ \
     ZKUI_PORT=9090 \
-    ZK_SERVER=zookeeper:2181 \
-    ZKUI_ADMIN_PW=admin
+    ZK_SERVER=zk_backend:2181 \
+    ZKUI_ADMIN_PW=manager
 
 RUN apk --no-cache add wget \
  && wget -qO - "http://ftp.unicamp.br/pub/apache/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" | tar xfz - -C /opt/ \
@@ -23,5 +23,6 @@ ENV ZKUI_ADMIN_PW=admin \
     ZKUI_USER_PW=user \
     ZKUI_PORT=9090
 COPY opt/qnib/zkui/bin/start.sh /opt/qnib/zkui/bin/
+COPY opt/qnib/entry/* /opt/qnib/entry/
 COPY opt/qnib/zkui/conf/zkui.conf.orig /opt/qnib/zkui/conf/
 CMD ["/opt/qnib/zkui/bin/start.sh"]
