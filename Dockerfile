@@ -5,7 +5,8 @@ ENV M2_HOME=/usr/lib/mvn \
     JAVA_HOME=/usr/lib/jvm/java-8-oracle/ \
     ZKUI_PORT=9090 \
     ZK_SERVER=zk_backend:2181 \
-    ZKUI_ADMIN_PW=manager
+    ZKUI_ADMIN_PW=admin \
+    ZKUI_USER_PW=user
 
 RUN apk --no-cache add wget curl \
  && wget -qO - "http://ftp.unicamp.br/pub/apache/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz" | tar xfz - -C /opt/ \
@@ -19,9 +20,6 @@ RUN apk --no-cache add wget curl \
  && cd /opt/zkui && mvn clean install \
  && rm -rf /tmp/* /var/cache/apk/* /usr/lib/mvn /opt/zkui/config.cfg
 RUN echo "grep zkSer /opt/zkui/config.cfg" >> /root/.bash_history
-ENV ZKUI_ADMIN_PW=admin \
-    ZKUI_USER_PW=user \
-    ZKUI_PORT=9090
 COPY opt/qnib/zkui/bin/start.sh /opt/qnib/zkui/bin/
 COPY opt/qnib/entry/* /opt/qnib/entry/
 COPY opt/qnib/zkui/conf/zkui.conf.orig /opt/qnib/zkui/conf/
