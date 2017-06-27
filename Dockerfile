@@ -1,7 +1,8 @@
 FROM qnib/alplain-jdk8
 
 ARG MAVEN_VERSION="3.3.9"
-ENV M2_HOME=/usr/lib/mvn \
+ENV ENTRYPOINTS_DIR=/opt/qnib/entry \
+    M2_HOME=/usr/lib/mvn \
     JAVA_HOME=/usr/lib/jvm/java-8-oracle/ \
     ZKUI_PORT=9090 \
     ZK_SERVER=zk_backend:2181 \
