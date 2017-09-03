@@ -1,7 +1,7 @@
 version: '3'
 services:
   backend:
-    image: qnib/plain-zookeeper
+    image: qnib/plain-zookeeper@sha256:6dfdaae24f3d1ef77e76dff85a5ab8ac7edb2d145935f213b7ae5176377eacc1
     ports:
       - "2181:2181"
     deploy:
@@ -16,11 +16,11 @@ services:
       restart_policy:
         condition: on-failure
   frontend:
-    image: qnib/plain-zkui
+    image: qnib/plain-zkui@sha256:d66972bd886ade9a8d7383f5064bd825f6d29275a282250cb0adf52475f67726
     ports:
       - "9090:9090"
     environment:
-      - ZK_SERVER=tasks.zookeeper:2181
+      - ZK_SERVER=tasks.backend:2181
     deploy:
       replicas: 1
       resources:
