@@ -1,13 +1,16 @@
 ARG DOCKER_REGISTRY=docker.io
-FROM ${DOCKER_REGISTRY}/qnib/alplain-jdk8
+ARG FROM_IMG_REPO=qnib
+ARG FROM_IMG_NAME="alplain-openjdk8"
+ARG FROM_IMG_TAG="2019-01-28.1"
+ARG FROM_IMG_HASH=""
+FROM ${DOCKER_REGISTRY}/${FROM_IMG_REPO}/${FROM_IMG_NAME}:${FROM_IMG_TAG}${DOCKER_IMG_HASH}
 
-ARG MAVEN_VERSION="3.3.9"
+ARG MAVEN_VERSION="3.6.0"
 ARG ZKUI_COMMIT=8d3441d0e3f2299a003d0d75308519e82564836c
 LABEL zkui.commit=${ZKUI_COMMIT} \
       zkui.maven.version=${MAVEN_VERSION}
 ENV ENTRYPOINTS_DIR=/opt/qnib/entry \
     M2_HOME=/usr/lib/mvn \
-    JAVA_HOME=/usr/lib/jvm/java-8-oracle/ \
     ZKUI_PORT=9090 \
     ZK_SERVER=tasks.zookeeper:2181 \
     ZKUI_ADMIN_PW=manager \
