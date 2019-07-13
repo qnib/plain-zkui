@@ -20,7 +20,7 @@ services:
     ports:
       - "9090:9090"
     environment:
-      - ZK_SERVER=tasks.backend:2181
+      - ZK_SERVER=backend:2181
     deploy:
       replicas: 1
       resources:
